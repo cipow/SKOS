@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/filter_kos"
+        android:id="@+id/filter_daftar"
         android:icon="@android:drawable/ic_menu_sort_by_size"
         android:title="filter"
         app:showAsAction="always" />
