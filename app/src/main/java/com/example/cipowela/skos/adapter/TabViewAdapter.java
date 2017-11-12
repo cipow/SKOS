@@ -13,7 +13,7 @@ import com.example.cipowela.skos.fragment.menu.PemilikKosFragment;
 
 public class TabViewAdapter extends FragmentPagerAdapter{
 
-    String[] data = {"Daftar Kos", "Pemilik Kos"};
+    private String[] data = {"Daftar Kos", "Pemilik Kos"};
 
     public TabViewAdapter(FragmentManager fm) {
         super(fm);
