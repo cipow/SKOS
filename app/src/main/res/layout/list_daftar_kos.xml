@@ -17,17 +17,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nama Kos"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="tipe kos - tipe kamar"/>
+        android:text="tipe kos - tipe kamar"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="harga - sisa kamar"/>
+        android:text="harga - sisa kamar"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle" />
 
     <View
         android:layout_width="match_parent"
