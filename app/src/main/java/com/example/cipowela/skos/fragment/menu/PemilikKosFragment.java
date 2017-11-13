@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -57,7 +58,9 @@ public class PemilikKosFragment extends Fragment {
                     editor = preferences.edit();
                     editor.putString("user", "user");
                     editor.apply();
-                    Toast.makeText(getActivity(), preferences.getString("user",""), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), preferences.getString("user", ""), Toast.LENGTH_SHORT).show();
+
+                    refreshPage();
                 }
             });
 
@@ -102,8 +105,21 @@ public class PemilikKosFragment extends Fragment {
             editor.remove("user");
             editor.apply();
             Toast.makeText(getActivity(), "klik logout", Toast.LENGTH_SHORT).show();
+            refreshPage();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void refreshPage() {
+        FragmentTransaction frg = getFragmentManager().beginTransaction();
+        frg.detach(this).attach(this).commit();
+
+        preferences = getActivity().getSharedPreferences(PemKosPrefs, 0);
+        if (preferences.contains("user")) {
+            setHasOptionsMenu(true);
+        } else {
+            setHasOptionsMenu(false);
+        }
     }
 }
