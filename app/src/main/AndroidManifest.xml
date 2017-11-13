@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".DaftarActivity"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:label="Daftar S KOS"/>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.example.cipowela.skos.fragment.menu;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cipowela.skos.DaftarActivity;
 import com.example.cipowela.skos.R;
 
 /**
@@ -22,7 +24,7 @@ import com.example.cipowela.skos.R;
 public class PemilikKosFragment extends Fragment {
 
     private TextView textView;
-    private Button login;
+    private Button login, daftar;
 
     public PemilikKosFragment() {
         // Required empty public constructor
@@ -35,6 +37,15 @@ public class PemilikKosFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_pemilik_kos_login, container, false);
         login = (Button) v.findViewById(R.id.pemilik_login);
+        daftar = (Button) v.findViewById(R.id.daftar_pemilik_kos);
+
+        daftar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), DaftarActivity.class));
+            }
+        });
+
         return v;
     }
 
