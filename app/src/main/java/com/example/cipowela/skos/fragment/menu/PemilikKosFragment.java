@@ -10,6 +10,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cipowela.skos.R;
@@ -19,6 +21,8 @@ import com.example.cipowela.skos.R;
  */
 public class PemilikKosFragment extends Fragment {
 
+    private TextView textView;
+    private Button login;
 
     public PemilikKosFragment() {
         // Required empty public constructor
@@ -26,10 +30,12 @@ public class PemilikKosFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pemilik_kos, container, false);
+        View v = inflater.inflate(R.layout.fragment_pemilik_kos_login, container, false);
+        login = (Button) v.findViewById(R.id.pemilik_login);
+        return v;
     }
 
     @Override
@@ -47,12 +53,12 @@ public class PemilikKosFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.setting_menu) {
-            Toast.makeText(getContext(), "setting klik", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "klik setting", Toast.LENGTH_SHORT).show();
             return true;
         }
 
         if (item.getItemId() == R.id.logout_pemilik) {
-            Toast.makeText(getContext(), "logout klik", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "klik logout", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
