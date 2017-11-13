@@ -40,4 +40,9 @@ public class TabViewAdapter extends FragmentPagerAdapter{
     public CharSequence getPageTitle(int position) {
         return data[position];
     }
+
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
+    }
 }
