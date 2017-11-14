@@ -3,4 +3,5 @@
     <color name="colorPrimary">@android:color/holo_orange_light</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorAbuabu">#acacac</color>
 </resources>

@@ -3,46 +3,60 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:orientation="vertical">
+    android:layout_margin="5dp"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:padding="5dp">
 
     <ImageView
+        android:id="@+id/list_gambar"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:srcCompat="@drawable/ruby"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/border_image"
         android:scaleType="fitXY"
-        android:layout_marginBottom="8dp"/>
+        app:srcCompat="@drawable/ruby" />
 
     <TextView
+        android:id="@+id/list_nama_kos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nama Kos"
-        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/list_tipe_kos_kamar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="tipe kos - tipe kamar"
-        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+        android:textColor="@android:color/black"
+        android:textStyle="italic" />
 
     <TextView
+        android:id="@+id/list_harga_sisa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="harga - sisa kamar"
-        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+        android:textColor="@android:color/black"
+        android:textStyle="italic" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/background_dark"
+        android:layout_marginBottom="4dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"/>
+        android:background="@android:color/background_dark" />
 
     <Button
+        android:id="@+id/list_lihat"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Lihat"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold" />
 
 </LinearLayout>
