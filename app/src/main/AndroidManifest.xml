@@ -16,9 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DaftarActivity"
-            android:parentActivityName=".MainActivity"
-            android:label="Daftar S KOS"/>
+        <activity
+            android:name=".DaftarActivity"
+            android:label="Daftar S KOS"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".DetailKosActivity"
+            android:parentActivityName=".MainActivity" />
     </application>
 
 </manifest>
