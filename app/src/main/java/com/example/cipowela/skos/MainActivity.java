@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setLogo(R.drawable.skos);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         pager = (ViewPager) findViewById(R.id.viewPager);
