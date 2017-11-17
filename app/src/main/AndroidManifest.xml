@@ -18,8 +18,7 @@
         </activity>
         <activity android:name=".MainActivity"/>
         <activity
-            android:name=".fragment.menu.ownerkos.DaftarActivity"
-            android:label="Daftar S KOS"/>
+            android:name=".fragment.menu.ownerkos.DaftarActivity"/>
         <activity
             android:name=".fragment.menu.listkos.DetailKosActivity"/>
     </application>
