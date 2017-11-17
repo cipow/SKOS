@@ -9,9 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.cipowela.skos.DetailKosActivity;
+import com.example.cipowela.skos.fragment.menu.listkos.DetailKosActivity;
 import com.example.cipowela.skos.R;
 import com.example.cipowela.skos.TestModel;
 
