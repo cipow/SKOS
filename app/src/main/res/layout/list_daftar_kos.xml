@@ -15,7 +15,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/border_image"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/ruby" />
+        app:srcCompat="@drawable/no_image" />
 
     <TextView
         android:id="@+id/list_nama_kos"
