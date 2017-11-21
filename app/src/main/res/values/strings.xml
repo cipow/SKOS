@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">S KOS</string>
+
+    <!-- nama-nama untuk filter harga-->
+    <string-array name="listHarga">
+        <item>Semua Harga</item>
+        <item>Rp 300.000</item>
+        <item>Rp 600.000</item>
+        <item>Rp 800.000</item>
+        <item>Rp 1.000.000</item>
+    </string-array>
+    <string-array name="valHarga">
+        <item>0</item>
+        <item>300000</item>
+        <item>600000</item>
+        <item>800000</item>
+        <item>1000000</item>
+    </string-array>
+
+    <!-- nama-nama untuk pengurutan -->
+    <string-array name="listOrdered">
+        <item>Harga Terkecil</item>
+        <item>Sisa Kamar Terbanyak</item>
+    </string-array>
+    <string-array name="valOrdered">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+
 </resources>

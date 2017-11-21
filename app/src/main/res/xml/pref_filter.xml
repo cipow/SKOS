@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:key="harga"
+        android:title="Harga"
+        android:summary="filter berdasarkan harga kos"
+        android:defaultValue="0"
+        android:entries="@array/listHarga"
+        android:entryValues="@array/valHarga" />
+
+    <SwitchPreference
+        android:key="sisa_kamar"
+        android:title="Sisa Kamar"
+        android:summary="cari kos yang masih memiliki sisa kamar"
+        android:defaultValue="false"/>
+
+    <ListPreference
+        android:key="ordered"
+        android:title="Urutkan"
+        android:summary="urutkan berdasarkan"
+        android:defaultValue="0"
+        android:entries="@array/listOrdered"
+        android:entryValues="@array/valOrdered" />
+</PreferenceScreen>

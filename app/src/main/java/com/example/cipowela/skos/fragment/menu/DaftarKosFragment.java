@@ -1,11 +1,15 @@
 package com.example.cipowela.skos.fragment.menu;
 
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +21,7 @@ import android.widget.Toast;
 import com.example.cipowela.skos.R;
 import com.example.cipowela.skos.TestModel;
 import com.example.cipowela.skos.adapter.DaftarKosAdapter;
+import com.example.cipowela.skos.fragment.menu.listkos.FilterSettings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +49,12 @@ public class DaftarKosFragment extends Fragment {
         view.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         view.setAdapter(kosAdapter);
         isiData();
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        Log.d("M-harga", sharedPreferences.getString("harga","kosong"));
+        Log.d("sisa", String.valueOf(sharedPreferences.getBoolean("sisa",false)));
+        Log.d("ordered", sharedPreferences.getString("ordered","kosong"));
+
         return v;
     }
 
@@ -79,7 +90,7 @@ public class DaftarKosFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.filter_daftar) {
-            Toast.makeText(getContext(), "filter klik", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getActivity(), FilterSettings.class));
             return true;
         }
         return super.onOptionsItemSelected(item);
