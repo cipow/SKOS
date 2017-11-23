@@ -16,10 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".fragment.menu.ownerkos.DaftarActivity" />
         <activity android:name=".fragment.menu.listkos.DetailKosActivity" />
-        <activity android:name=".fragment.menu.listkos.FilterSettings"></activity>
+        <activity android:name=".fragment.menu.listkos.FilterSettings"/>
     </application>
 
 </manifest>

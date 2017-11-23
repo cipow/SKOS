@@ -27,5 +27,8 @@
         <item>1</item>
     </string-array>
 
+    <string name="nav_drawer_open">opened</string>
+    <string name="nav_drawer_close">closed</string>
+
 
 </resources>

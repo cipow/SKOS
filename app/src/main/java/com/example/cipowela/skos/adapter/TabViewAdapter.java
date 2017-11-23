@@ -13,7 +13,7 @@ import com.example.cipowela.skos.fragment.menu.PemilikKosFragment;
 
 public class TabViewAdapter extends FragmentPagerAdapter{
 
-    private String[] data = {"Daftar Kos", "Pemilik Kos"};
+    private String[] data = {"home", "login", "register"};
 
     public TabViewAdapter(FragmentManager fm) {
         super(fm);
@@ -26,6 +26,8 @@ public class TabViewAdapter extends FragmentPagerAdapter{
                 return new DaftarKosFragment();
             case 1:
                 return new PemilikKosFragment();
+            case 2:
+                return new PemilikKosFragment();
             default:
                 return null;
         }
@@ -36,13 +38,4 @@ public class TabViewAdapter extends FragmentPagerAdapter{
         return data.length;
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return data[position];
-    }
-
-    @Override
-    public int getItemPosition(Object object) {
-        return POSITION_NONE;
-    }
 }
