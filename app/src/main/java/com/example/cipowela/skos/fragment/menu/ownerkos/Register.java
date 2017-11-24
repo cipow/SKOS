@@ -1,56 +1,59 @@
 package com.example.cipowela.skos.fragment.menu.ownerkos;
 
-import android.graphics.Color;
+
+import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
-import android.text.SpannableString;
 import android.text.TextWatcher;
-import android.text.style.ForegroundColorSpan;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.cipowela.skos.R;
 
-public class DaftarActivity extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class Register extends Fragment {
 
-    TextInputLayout usernameLayout, passwordLayout, teleponLayout, namaLayout, alamatLayout;
-    TextInputEditText username, password, telepon, nama, alamat;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_daftar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        changeTitleActionBar();
-        initObject();
-        setTextChangeListener();
+    public Register() {
+        // Required empty public constructor
     }
 
-    private void changeTitleActionBar() {
-        String text = "Daftar S KOS";
-        SpannableString spannableString = new SpannableString(text);
-        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FF80470A"))
-                , 0, text.length(), 0);
-        getSupportActionBar().setTitle(spannableString);
+    private View v;
+    private TextInputLayout usernameLayout, passwordLayout, teleponLayout, namaLayout, alamatLayout;
+    private TextInputEditText username, password, telepon, nama, alamat;
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        v = inflater.inflate(R.layout.fragment_register, container, false);
+        initObject();
+        setTextChangeListener();
+
+        return v;
     }
 
     private void initObject() {
-        usernameLayout = (TextInputLayout) findViewById(R.id.IL_username);
-        username = (TextInputEditText) findViewById(R.id.ET_username);
+        usernameLayout = (TextInputLayout) v.findViewById(R.id.IL_username);
+        username = (TextInputEditText) v.findViewById(R.id.ET_username);
 
-        passwordLayout = (TextInputLayout) findViewById(R.id.IL_password);
-        password = (TextInputEditText) findViewById(R.id.ET_password);
+        passwordLayout = (TextInputLayout) v.findViewById(R.id.IL_password);
+        password = (TextInputEditText) v.findViewById(R.id.ET_password);
 
-        teleponLayout = (TextInputLayout) findViewById(R.id.IL_telpon);
-        telepon = (TextInputEditText) findViewById(R.id.ET_telpon);
+        teleponLayout = (TextInputLayout) v.findViewById(R.id.IL_telpon);
+        telepon = (TextInputEditText) v.findViewById(R.id.ET_telpon);
 
-        namaLayout = (TextInputLayout) findViewById(R.id.IL_nama);
-        nama = (TextInputEditText) findViewById(R.id.ET_nama);
+        namaLayout = (TextInputLayout) v.findViewById(R.id.IL_nama);
+        nama = (TextInputEditText) v.findViewById(R.id.ET_nama);
 
-        alamatLayout = (TextInputLayout) findViewById(R.id.IL_alamat);
-        alamat = (TextInputEditText) findViewById(R.id.ET_alamat);
+        alamatLayout = (TextInputLayout) v.findViewById(R.id.IL_alamat);
+        alamat = (TextInputEditText) v.findViewById(R.id.ET_alamat);
     }
 
     private void setTextChangeListener() {
@@ -170,9 +173,4 @@ public class DaftarActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        finish();
-        return true;
-    }
 }

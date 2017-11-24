@@ -18,9 +18,8 @@
         </activity>
         <activity android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".fragment.menu.ownerkos.DaftarActivity" />
-        <activity android:name=".fragment.menu.listkos.DetailKosActivity" />
-        <activity android:name=".fragment.menu.listkos.FilterSettings"/>
+        <activity android:name=".fragment.menu.userkos.DetailKosActivity" />
+        <activity android:name=".fragment.menu.userkos.FilterSettings"/>
     </application>
 
 </manifest>

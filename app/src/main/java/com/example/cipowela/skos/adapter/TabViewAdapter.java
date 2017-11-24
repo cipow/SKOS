@@ -4,8 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.cipowela.skos.fragment.menu.DaftarKosFragment;
+import com.example.cipowela.skos.fragment.menu.Home;
 import com.example.cipowela.skos.fragment.menu.PemilikKosFragment;
+import com.example.cipowela.skos.fragment.menu.ownerkos.Login;
+import com.example.cipowela.skos.fragment.menu.ownerkos.Register;
 
 /**
  * Created by cipowela on 12/11/17.
@@ -23,11 +25,11 @@ public class TabViewAdapter extends FragmentPagerAdapter{
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new DaftarKosFragment();
+                return new Home();
             case 1:
-                return new PemilikKosFragment();
+                return new Login();
             case 2:
-                return new PemilikKosFragment();
+                return new Register();
             default:
                 return null;
         }

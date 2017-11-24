@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cipowela.skos.fragment.menu.ownerkos.DaftarActivity;
 import com.example.cipowela.skos.R;
 
 /**
@@ -44,32 +43,23 @@ public class PemilikKosFragment extends Fragment {
         View v;
         preferences = getActivity().getSharedPreferences(PemKosPrefs, 0);
 
-        if (preferences.contains("user")) {
-            v = inflater.inflate(R.layout.fragment_pemilik_kos, container, false);
-        } else {
-            v = inflater.inflate(R.layout.fragment_pemilik_kos_login, container, false);
-            login = (Button) v.findViewById(R.id.pemilik_login);
-            daftar = (Button) v.findViewById(R.id.daftar_pemilik_kos);
+        v = inflater.inflate(R.layout.fragment_pemilik_kos, container, false);
 
-            login.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    editor = preferences.edit();
-                    editor.putString("user", "user");
-                    editor.apply();
-                    Toast.makeText(getActivity(), preferences.getString("user", ""), Toast.LENGTH_SHORT).show();
+        login = (Button) v.findViewById(R.id.pemilik_login);
+        daftar = (Button) v.findViewById(R.id.daftar_pemilik_kos);
 
-                    refreshPage();
-                }
-            });
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor = preferences.edit();
+                editor.putString("user", "user");
+                editor.apply();
+                Toast.makeText(getActivity(), preferences.getString("user", ""), Toast.LENGTH_SHORT).show();
 
-            daftar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(getActivity(), DaftarActivity.class));
-                }
-            });
-        }
+                refreshPage();
+            }
+        });
+
 
         return v;
     }

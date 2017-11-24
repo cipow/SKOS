@@ -16,12 +16,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.cipowela.skos.R;
 import com.example.cipowela.skos.TestModel;
 import com.example.cipowela.skos.adapter.DaftarKosAdapter;
-import com.example.cipowela.skos.fragment.menu.listkos.FilterSettings;
+import com.example.cipowela.skos.fragment.menu.userkos.FilterSettings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +28,12 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DaftarKosFragment extends Fragment {
+public class Home extends Fragment {
     private RecyclerView view;
     private List<TestModel> testModels = new ArrayList<>();
     private DaftarKosAdapter kosAdapter;
 
-    public DaftarKosFragment() {
+    public Home() {
         // Required empty public constructor
     }
 
@@ -43,7 +42,7 @@ public class DaftarKosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_daftar_kos, container, false);
+        View v = inflater.inflate(R.layout.fragment_home, container, false);
         view = (RecyclerView) v.findViewById(R.id.rv_daftar_kos);
         kosAdapter = new DaftarKosAdapter(getActivity(), testModels);
         view.setLayoutManager(new GridLayoutManager(getActivity(), 2));
