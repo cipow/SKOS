@@ -2,14 +2,19 @@ package com.example.cipowela.skos.fragment.menu.ownerkos;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.cipowela.skos.R;
 
@@ -41,6 +46,43 @@ public class Register extends Fragment {
         setTextChangeListener();
 
         return v;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.register_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.register) {
+            if (checkFormError())
+                Toast.makeText(getActivity(), "Ada dialog yes/no terus pindah login", Toast.LENGTH_LONG).show();
+            else
+                Toast.makeText(getActivity(), "Silahkan lengkapi data dengan benar", Toast.LENGTH_LONG).show();
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private boolean checkFormError() {
+
+        if (usernameLayout.getError().toString().isEmpty()
+                && passwordLayout.getError().toString().isEmpty()
+                && teleponLayout.getError().toString().isEmpty()
+                && namaLayout.getError().toString().isEmpty()
+                && alamatLayout.getError().toString().isEmpty())
+            return true;
+
+        return false;
     }
 
     private void initObject() {
@@ -85,7 +127,7 @@ public class Register extends Fragment {
                 else if (!matcher.matches())
                     usernameLayout.setError("Hanya boleh huruf kecil, huruf besar, dan garis bawah (_)");
                 else
-                    usernameLayout.setError(null);
+                    usernameLayout.setError("");
 
             }
         });
@@ -114,7 +156,7 @@ public class Register extends Fragment {
                 else if (!matcher.matches())
                     passwordLayout.setError("Harus mengandung satu huruf kecil dan angka");
                 else
-                    passwordLayout.setError(null);
+                    passwordLayout.setError("");
 
             }
         });
@@ -138,7 +180,7 @@ public class Register extends Fragment {
                 else if (s.length() == 0)
                     teleponLayout.setError("Cannot Empty");
                 else
-                    teleponLayout.setError(null);
+                    teleponLayout.setError("");
             }
         });
 
@@ -161,7 +203,7 @@ public class Register extends Fragment {
                 else if (s.length() == 0)
                     namaLayout.setError("Cannot Empty");
                 else
-                    namaLayout.setError(null);
+                    namaLayout.setError("");
             }
         });
 
@@ -182,7 +224,7 @@ public class Register extends Fragment {
                 if (s.length() == 0)
                     alamatLayout.setError("Cannot Empty");
                 else
-                    alamatLayout.setError(null);
+                    alamatLayout.setError("");
             }
         });
     }
