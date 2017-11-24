@@ -2,20 +2,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/guest_home"
+            android:id="@+id/home"
             android:checked="true"
             android:title="Home" />
         <item
-            android:id="@+id/guest_login"
-            android:title="Login" />
+            android:id="@+id/profil"
+            android:title="Profil" />
         <item
-            android:id="@+id/guest_register"
-            android:title="Register" />
+            android:id="@+id/kamar"
+            android:title="Kamar" />
+        <item
+            android:id="@+id/penginap"
+            android:title="Penginap" />
+        <item
+            android:id="@+id/logout"
+            android:title="Keluar" />
     </group>
 
     <item android:title="Other">
         <menu>
             <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/menu_how_to_use"
+                    android:title="Cara Penggunaan" />
                 <item
                     android:id="@+id/menu_about"
                     android:title="Tentang Aplikasi" />

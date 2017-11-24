@@ -1,5 +1,7 @@
 package com.example.cipowela.skos;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -17,8 +19,10 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.cipowela.skos.adapter.GuestViewAdapter;
+import com.example.cipowela.skos.adapter.OwnerKosViewAdapter;
+import com.example.cipowela.skos.fragment.menu.ownerkos.Login;
 
-public class MainActivity extends AppCompatActivity {
+public class MainOwnerKosActivity extends AppCompatActivity {
 
     DrawerLayout drawer;
     NavigationView navigation;
@@ -28,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_owner_kos);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         navigation = (NavigationView) findViewById(R.id.navigationView);
         pager = (ViewPager) findViewById(R.id.viewPager);
 
-        GuestViewAdapter pagerAdapter = new GuestViewAdapter(getSupportFragmentManager());
+        OwnerKosViewAdapter pagerAdapter = new OwnerKosViewAdapter(getSupportFragmentManager());
         pager.setAdapter(pagerAdapter);
         pager.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -52,17 +56,33 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.guest_home:
+                    case R.id.home:
                         pager.setCurrentItem(0);
                         break;
-                    case R.id.guest_login:
+                    case R.id.profil:
                         pager.setCurrentItem(1);
                         break;
-                    case R.id.guest_register:
+                    case R.id.kamar:
                         pager.setCurrentItem(2);
                         break;
-                    case R.id.menu_about:
+                    case R.id.penginap:
                         pager.setCurrentItem(3);
+                        break;
+                    case R.id.logout:
+                        SharedPreferences preferences = getSharedPreferences(Login.OwnnerKosPrefs,0);
+                        preferences.edit().remove("user").apply();
+
+                        Intent intent = new Intent(MainOwnerKosActivity.this, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+
+                        break;
+                    case R.id.menu_how_to_use:
+                        pager.setCurrentItem(4);
+                        break;
+                    case R.id.menu_about:
+                        pager.setCurrentItem(5);
                         break;
                 }
 
@@ -76,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
                 R.string.nav_drawer_open, R.string.nav_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
     }
 
     private void setIconActionBar() {

@@ -1,6 +1,7 @@
 package com.example.cipowela.skos.fragment.menu.ownerkos;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.cipowela.skos.MainOwnerKosActivity;
 import com.example.cipowela.skos.R;
 
 /**
@@ -30,7 +32,7 @@ public class Login extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_login, container, false);
         preferences = getActivity().getSharedPreferences(OwnnerKosPrefs, 0);
@@ -44,6 +46,11 @@ public class Login extends Fragment {
                 editor.putString("user", "user");
                 editor.apply();
                 Toast.makeText(getActivity(), preferences.getString("user", ""), Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(getActivity(), MainOwnerKosActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getActivity().startActivity(intent);
             }
         });
 
