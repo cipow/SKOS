@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 
 import com.example.cipowela.skos.R;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -26,7 +29,8 @@ public class Register extends Fragment {
     private View v;
     private TextInputLayout usernameLayout, passwordLayout, teleponLayout, namaLayout, alamatLayout;
     private TextInputEditText username, password, telepon, nama, alamat;
-
+    private static final String USERNAME_PATTERN = "^[a-zA-Z0-9_]{6,32}$";
+    private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z]).{8,32})";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,10 +75,15 @@ public class Register extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+                Pattern pattern = Pattern.compile(USERNAME_PATTERN);
+                Matcher matcher = pattern.matcher(s);
+
                 if (s.length() > usernameLayout.getCounterMaxLength())
                     usernameLayout.setError("Max " + usernameLayout.getCounterMaxLength() + " character");
                 else if (s.length() < 6)
                     usernameLayout.setError("Min 6 character");
+                else if (!matcher.matches())
+                    usernameLayout.setError("Hanya boleh huruf kecil, huruf besar, dan garis bawah (_)");
                 else
                     usernameLayout.setError(null);
 
@@ -95,10 +104,15 @@ public class Register extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+                Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+                Matcher matcher = pattern.matcher(s);
+
                 if (s.length() > passwordLayout.getCounterMaxLength())
                     passwordLayout.setError("Max " + passwordLayout.getCounterMaxLength() + " character");
                 else if (s.length() < 8)
                     passwordLayout.setError("Min 8 character");
+                else if (!matcher.matches())
+                    passwordLayout.setError("Harus mengandung satu huruf kecil dan angka");
                 else
                     passwordLayout.setError(null);
 
