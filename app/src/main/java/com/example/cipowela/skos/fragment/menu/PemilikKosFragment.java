@@ -45,22 +45,6 @@ public class PemilikKosFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_pemilik_kos, container, false);
 
-        login = (Button) v.findViewById(R.id.pemilik_login);
-        daftar = (Button) v.findViewById(R.id.daftar_pemilik_kos);
-
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editor = preferences.edit();
-                editor.putString("user", "user");
-                editor.apply();
-                Toast.makeText(getActivity(), preferences.getString("user", ""), Toast.LENGTH_SHORT).show();
-
-                refreshPage();
-            }
-        });
-
-
         return v;
     }
 
