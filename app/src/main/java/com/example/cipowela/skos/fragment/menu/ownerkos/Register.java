@@ -1,11 +1,13 @@
 package com.example.cipowela.skos.fragment.menu.ownerkos;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.cipowela.skos.MainActivity;
 import com.example.cipowela.skos.R;
 
 import java.util.regex.Matcher;
@@ -63,9 +66,26 @@ public class Register extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.register) {
-            if (checkFormError())
-                Toast.makeText(getActivity(), "Ada dialog yes/no terus pindah login", Toast.LENGTH_LONG).show();
-            else
+            if (checkFormError()) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Apakah anda yakin ?");
+                builder.setMessage("pastikan data anda sudah sesuai dengan diri anda");
+                builder.setPositiveButton("YA", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.pager.setCurrentItem(1);
+                        Toast.makeText(getActivity(), "kirim data ke server", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setNegativeButton("TIDAK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.show();
+
+            } else
                 Toast.makeText(getActivity(), "Silahkan lengkapi data dengan benar", Toast.LENGTH_LONG).show();
 
             return true;

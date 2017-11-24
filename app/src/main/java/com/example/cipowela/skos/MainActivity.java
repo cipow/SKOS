@@ -20,9 +20,9 @@ import com.example.cipowela.skos.adapter.GuestViewAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static ViewPager pager;
     DrawerLayout drawer;
     NavigationView navigation;
-    ViewPager pager;
     Toolbar toolbar;
 
     @Override
