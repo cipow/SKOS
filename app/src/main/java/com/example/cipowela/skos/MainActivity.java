@@ -74,6 +74,17 @@ public class MainActivity extends AppCompatActivity {
         // set toggle icon navbar
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.nav_drawer_open, R.string.nav_drawer_close);
+        toggle.setDrawerIndicatorEnabled(false);
+        toggle.setHomeAsUpIndicator(R.drawable.ic_drawer);
+        toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (drawer.isDrawerVisible(GravityCompat.START))
+                    drawer.closeDrawer(GravityCompat.START);
+                else
+                    drawer.openDrawer(GravityCompat.START);
+            }
+        });
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
