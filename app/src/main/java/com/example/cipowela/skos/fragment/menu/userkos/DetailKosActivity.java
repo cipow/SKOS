@@ -15,6 +15,7 @@ public class DetailKosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_kos);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
 
         String text = "S KOS";
         SpannableString spannableString = new SpannableString(text);

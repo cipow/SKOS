@@ -4,20 +4,26 @@
         <item
             android:id="@+id/guest_home"
             android:checked="true"
+            android:icon="@drawable/ic_home"
             android:title="Home" />
         <item
             android:id="@+id/guest_login"
+            android:icon="@drawable/ic_login"
             android:title="Login" />
         <item
             android:id="@+id/guest_register"
+            android:icon="@drawable/ic_register"
             android:title="Register" />
     </group>
 
-    <item android:title="Other">
+    <item
+        android:icon="@drawable/ic_other"
+        android:title="Other">
         <menu>
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/menu_about"
+                    android:icon="@drawable/ic_about"
                     android:title="Tentang Aplikasi" />
             </group>
         </menu>

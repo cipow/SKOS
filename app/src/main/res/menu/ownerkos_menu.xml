@@ -1,32 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/home"
             android:checked="true"
+            android:icon="@drawable/ic_home"
             android:title="Home" />
-        <item
-            android:id="@+id/profil"
-            android:title="Profil" />
-        <item
-            android:id="@+id/kamar"
-            android:title="Kamar" />
-        <item
-            android:id="@+id/penginap"
-            android:title="Penginap" />
-        <item
-            android:id="@+id/logout"
-            android:title="Keluar" />
     </group>
 
-    <item android:title="Other">
+    <item
+        android:icon="@drawable/ic_kos"
+        android:title="Menu">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/profil"
+                    android:icon="@drawable/ic_profil"
+                    android:title="Profil" />
+                <item
+                    android:id="@+id/kamar"
+                    android:icon="@drawable/ic_kamar"
+                    android:title="Kamar" />
+                <item
+                    android:id="@+id/penginap"
+                    android:icon="@drawable/ic_penginap"
+                    android:title="Penginap" />
+                <item
+                    android:id="@+id/logout"
+                    android:icon="@drawable/ic_logout"
+                    android:title="Keluar" />
+            </group>
+        </menu>
+    </item>
+
+    <item
+        android:icon="@drawable/ic_other"
+        android:title="Other">
         <menu>
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/menu_how_to_use"
+                    android:icon="@drawable/ic_how"
                     android:title="Cara Penggunaan" />
                 <item
                     android:id="@+id/menu_about"
+                    android:icon="@drawable/ic_about"
                     android:title="Tentang Aplikasi" />
             </group>
         </menu>

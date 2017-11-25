@@ -15,6 +15,7 @@ public class FilterSettings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back);
 
         String text = "Filter Settings";
         SpannableString spannableString = new SpannableString(text);
