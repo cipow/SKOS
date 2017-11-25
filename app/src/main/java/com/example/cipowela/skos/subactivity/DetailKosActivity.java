@@ -1,4 +1,4 @@
-package com.example.cipowela.skos.fragment.menu.userkos;
+package com.example.cipowela.skos.subactivity;
 
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
