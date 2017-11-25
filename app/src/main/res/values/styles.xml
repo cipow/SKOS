@@ -8,6 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
+
+    <style name="MainTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
     
     <style name="ErrorText" parent="TextAppearance.Design.Error">
         <item name="android:textSize">8sp</item>
