@@ -26,7 +26,7 @@ public class Profil extends Fragment {
         // Required empty public constructor
     }
 
-    ImageView image;
+    ImageView image, image_change;
     TextView nama, telepon, alamat, lain, nama_kos, jmlh_kamar;
     View v;
 
@@ -42,6 +42,7 @@ public class Profil extends Fragment {
 
     private void initObject() {
         image = (ImageView) v.findViewById(R.id.profil_image);
+        image_change = (ImageView) v.findViewById(R.id.profil_change_image);
         nama = (TextView) v.findViewById(R.id.profil_nama);
         telepon = (TextView) v.findViewById(R.id.profil_telepon);
         alamat = (TextView) v.findViewById(R.id.profil_alamat);
