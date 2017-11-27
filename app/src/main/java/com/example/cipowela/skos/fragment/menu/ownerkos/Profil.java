@@ -1,6 +1,7 @@
 package com.example.cipowela.skos.fragment.menu.ownerkos;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cipowela.skos.R;
+import com.example.cipowela.skos.subactivity.ProfilEditActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,7 +29,7 @@ public class Profil extends Fragment {
     }
 
     ImageView image, image_change;
-    TextView nama, telepon, alamat, lain, nama_kos, jmlh_kamar;
+    TextView username, nama, telepon, alamat, lain, nama_kos, jmlh_kamar;
     View v;
 
 
@@ -43,6 +45,7 @@ public class Profil extends Fragment {
     private void initObject() {
         image = (ImageView) v.findViewById(R.id.profil_image);
         image_change = (ImageView) v.findViewById(R.id.profil_change_image);
+        username = (TextView) v.findViewById(R.id.profil_username);
         nama = (TextView) v.findViewById(R.id.profil_nama);
         telepon = (TextView) v.findViewById(R.id.profil_telepon);
         alamat = (TextView) v.findViewById(R.id.profil_alamat);
@@ -66,7 +69,7 @@ public class Profil extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.profil_edit) {
-            Toast.makeText(getActivity(), "Edit profil", Toast.LENGTH_SHORT).show();
+            getActivity().startActivity(new Intent(getActivity(), ProfilEditActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

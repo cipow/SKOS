@@ -19,7 +19,7 @@ public class DetailKosActivity extends AppCompatActivity {
 
         String text = "S KOS";
         SpannableString spannableString = new SpannableString(text);
-        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FF80470A"))
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#000000"))
                 , 0, text.length(), 0);
         getSupportActionBar().setTitle(spannableString);
     }

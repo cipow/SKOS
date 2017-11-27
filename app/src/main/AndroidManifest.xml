@@ -24,7 +24,7 @@
             android:theme="@style/MainTheme" />
         <activity android:name=".subactivity.DetailKosActivity" />
         <activity android:name=".fragment.menu.userkos.FilterSettings" />
-
+        <activity android:name=".subactivity.ProfilEditActivity" />
     </application>
 
 </manifest>
