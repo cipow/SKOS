@@ -27,11 +27,21 @@
         <item>1</item>
     </string-array>
 
+    <!-- buat drawer navigation -->
     <string name="nav_drawer_open">opened</string>
     <string name="nav_drawer_close">closed</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <!--nama-nama untuk spinner tambah kamar tipe -->
+    <string-array name="tipe_kamar">
+        <item>COWOK</item>
+        <item>CEWEK</item>
+        <item>CAMPUR</item>
+    </string-array>
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fasilitas">Fasilitas kamar, jika lebih dari satu gunakan (,).\ncontoh: AC,Kamar mandi dalam,internet, atau semacanya.</string>
+    <string name="jenis">Silahkan isi sesuai jenis kamar yang anda punya.\ncontoh: normal, spesial atau semacanya</string>
 
 
 </resources>

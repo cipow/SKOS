@@ -39,6 +39,12 @@ public class Profil extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_profil, container, false);
         initObject();
+        image_change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "ganti foto profil", Toast.LENGTH_SHORT).show();
+            }
+        });
         return v;
     }
 
