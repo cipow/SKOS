@@ -8,7 +8,6 @@ import com.example.cipowela.skos.fragment.menu.About;
 import com.example.cipowela.skos.fragment.menu.Home;
 import com.example.cipowela.skos.fragment.menu.ownerkos.HowToUse;
 import com.example.cipowela.skos.fragment.menu.ownerkos.Kamar;
-import com.example.cipowela.skos.fragment.menu.ownerkos.Penginap;
 import com.example.cipowela.skos.fragment.menu.ownerkos.Profil;
 
 /**
@@ -16,7 +15,7 @@ import com.example.cipowela.skos.fragment.menu.ownerkos.Profil;
  */
 
 public class OwnerKosViewAdapter extends FragmentPagerAdapter {
-    private String[] data = {"home", "profil", "kamar", "penginap", "how", "about"};
+    private String[] data = {"home", "profil", "kamar", "how", "about"};
 
     public OwnerKosViewAdapter(FragmentManager fm) {
         super(fm);
@@ -32,10 +31,8 @@ public class OwnerKosViewAdapter extends FragmentPagerAdapter {
             case 2:
                 return new Kamar();
             case 3:
-                return new Penginap();
-            case 4:
                 return new HowToUse();
-            case 5:
+            case 4:
                 return new About();
             default:
                 return null;

@@ -24,10 +24,6 @@
                     android:icon="@drawable/ic_kamar"
                     android:title="Kamar" />
                 <item
-                    android:id="@+id/penginap"
-                    android:icon="@drawable/ic_penginap"
-                    android:title="Penginap" />
-                <item
                     android:id="@+id/logout"
                     android:icon="@drawable/ic_logout"
                     android:title="Logout" />

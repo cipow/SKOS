@@ -65,9 +65,6 @@ public class MainOwnerKosActivity extends AppCompatActivity {
                     case R.id.kamar:
                         pager.setCurrentItem(2);
                         break;
-                    case R.id.penginap:
-                        pager.setCurrentItem(3);
-                        break;
                     case R.id.logout:
                         SharedPreferences preferences = getSharedPreferences(Login.OwnnerKosPrefs,0);
                         preferences.edit().remove("user").apply();
@@ -79,10 +76,10 @@ public class MainOwnerKosActivity extends AppCompatActivity {
 
                         break;
                     case R.id.menu_how_to_use:
-                        pager.setCurrentItem(4);
+                        pager.setCurrentItem(3);
                         break;
                     case R.id.menu_about:
-                        pager.setCurrentItem(5);
+                        pager.setCurrentItem(4);
                         break;
                 }
 
