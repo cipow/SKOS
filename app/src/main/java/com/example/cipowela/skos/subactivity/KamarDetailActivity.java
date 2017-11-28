@@ -7,6 +7,8 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +16,7 @@ import com.example.cipowela.skos.R;
 
 public class KamarDetailActivity extends AppCompatActivity {
 
+    ImageView cover, cover_change;
     TextView tipe, jenis, harga, fasilitas, jumlah, penginap, sisa;
 
     @Override
@@ -22,6 +25,12 @@ public class KamarDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_kamar_detail);
         settingToolbar();
         initObject();
+        cover_change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(KamarDetailActivity.this, "ganti cover", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -63,6 +72,8 @@ public class KamarDetailActivity extends AppCompatActivity {
     }
 
     private void initObject() {
+        cover = (ImageView) findViewById(R.id.cover_image);
+        cover_change = (ImageView) findViewById(R.id.cover_change);
         tipe = (TextView) findViewById(R.id.kamar_detail_tipe);
         jenis = (TextView) findViewById(R.id.kamar_detail_jenis);
         harga = (TextView) findViewById(R.id.kamar_detail_harga);
