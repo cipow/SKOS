@@ -1,9 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    android:background="@android:color/white"
+    android:padding="10dp"
     tools:context="com.example.cipowela.skos.subactivity.KamarEditActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@android:color/white">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="3dp"
+                android:text="Tipe"
+                android:textColor="@color/colorAbuabu"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/kamar_add_tipe"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:entries="@array/tipe_kamar"
+                android:spinnerMode="dialog" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/IL_jenis_kamar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@android:color/white"
+            app:counterEnabled="true"
+            app:counterMaxLength="50"
+            app:counterOverflowTextAppearance="@style/CounterOverFlow"
+            app:counterTextAppearance="@style/CounterText"
+            app:errorEnabled="true"
+            app:hintTextAppearance="@style/HintText">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/ET_jenis_kamar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Jenis"
+                android:inputType="text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/jenis"
+                android:textColor="@color/colorAbuabu"
+                android:textStyle="italic" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/IL_harga_kamar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@android:color/white"
+            app:counterEnabled="true"
+            app:counterMaxLength="11"
+            app:counterOverflowTextAppearance="@style/CounterOverFlow"
+            app:counterTextAppearance="@style/CounterText"
+            app:errorEnabled="true"
+            app:hintTextAppearance="@style/HintText">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/ET_harga_kamar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Harga"
+                android:inputType="number" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Harga KOS per bulannya"
+                android:textColor="@color/colorAbuabu"
+                android:textStyle="italic" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/IL_jumlah_kamar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@android:color/white"
+            app:counterEnabled="true"
+            app:counterMaxLength="3"
+            app:counterOverflowTextAppearance="@style/CounterOverFlow"
+            app:counterTextAppearance="@style/CounterText"
+            app:errorEnabled="true"
+            app:hintTextAppearance="@style/HintText">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/ET_jumlah_kamar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Jumlah"
+                android:inputType="number" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jumlah kamar yang anda miliki untuk jenis kamar ini"
+                android:textColor="@color/colorAbuabu"
+                android:textStyle="italic" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/IL_fasilitas_kamar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@android:color/white"
+            app:errorEnabled="true"
+            app:hintTextAppearance="@style/HintText">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/ET_fasilitas_kamar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Fasilitas"
+                android:inputType="textMultiLine"
+                android:lines="3" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fasilitas"
+                android:textColor="@color/colorAbuabu"
+                android:textStyle="italic" />
+
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+</ScrollView>
