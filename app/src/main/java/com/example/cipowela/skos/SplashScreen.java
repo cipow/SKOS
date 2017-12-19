@@ -20,7 +20,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 SharedPreferences preferences = getSharedPreferences(Login.OwnnerKosPrefs,0);
                 Intent intent;
-                if (preferences.contains("user"))
+                if (preferences.contains("token"))
                     intent = new Intent(SplashScreen.this, MainOwnerKosActivity.class);
                 else
                     intent = new Intent(SplashScreen.this, MainActivity.class);
@@ -29,6 +29,6 @@ public class SplashScreen extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
-        }, 500);
+        }, 1000);
     }
 }

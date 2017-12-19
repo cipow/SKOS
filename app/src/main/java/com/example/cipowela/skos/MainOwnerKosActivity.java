@@ -67,7 +67,7 @@ public class MainOwnerKosActivity extends AppCompatActivity {
                         break;
                     case R.id.logout:
                         SharedPreferences preferences = getSharedPreferences(Login.OwnnerKosPrefs,0);
-                        preferences.edit().remove("user").apply();
+                        preferences.edit().remove("token").apply();
 
                         Intent intent = new Intent(MainOwnerKosActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

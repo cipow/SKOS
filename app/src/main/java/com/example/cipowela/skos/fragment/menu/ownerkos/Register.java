@@ -4,6 +4,7 @@ package com.example.cipowela.skos.fragment.menu.ownerkos;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -18,9 +19,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.cipowela.skos.ApiSKOS;
 import com.example.cipowela.skos.MainActivity;
 import com.example.cipowela.skos.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -73,8 +87,56 @@ public class Register extends Fragment {
                 builder.setPositiveButton("YA", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        MainActivity.pager.setCurrentItem(1);
-                        Toast.makeText(getActivity(), "kirim data ke server", Toast.LENGTH_SHORT).show();
+//                        MainActivity.pager.setCurrentItem(1);
+//                        Toast.makeText(getActivity(), "kirim data ke server", Toast.LENGTH_SHORT).show();
+
+
+                        final Snackbar snackbar = Snackbar.make(v, "Sending...", Snackbar.LENGTH_INDEFINITE);
+                        snackbar.show();
+
+                        RequestQueue queue = Volley.newRequestQueue(getActivity());
+                        StringRequest request = new StringRequest(
+                                Request.Method.POST, ApiSKOS.owners(),
+                                new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        try {
+                                            JSONObject status = new JSONObject(response);
+                                            if (status.getString("status").equals("created")) {
+                                                Toast.makeText(getActivity(), "Created", Toast.LENGTH_SHORT).show();
+                                                MainActivity.pager.setCurrentItem(1);
+                                                snackbar.dismiss();
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                            snackbar.dismiss();
+                                            Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        snackbar.dismiss();
+                                        Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                        ){
+                            @Override
+                            protected Map<String, String> getParams() throws AuthFailureError {
+                                Map<String, String> params = new HashMap<String, String>();
+                                params.put("username", username.getText().toString());
+                                params.put("password", password.getText().toString());
+                                params.put("telepon", telepon.getText().toString());
+                                params.put("nama", nama.getText().toString());
+                                params.put("alamat", alamat.getText().toString());
+
+
+                                return params;
+                            }
+                        };
+                        queue.add(request);
                     }
                 });
                 builder.setNegativeButton("TIDAK", new DialogInterface.OnClickListener() {

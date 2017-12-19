@@ -11,4 +11,12 @@ public class ApiSKOS {
         String url = root_url + "/api/kamars" + "?harga=" + harga + "&sisa=" + sisa;
         return url;
     }
+
+    public static String owners() {
+        return root_url + "/api/owners";
+    }
+
+    public static String auth() {
+        return owners() + "/auth";
+    }
 }

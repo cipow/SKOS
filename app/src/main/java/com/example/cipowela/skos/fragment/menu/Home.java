@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -42,6 +43,7 @@ import java.util.List;
  */
 public class Home extends Fragment {
     private RecyclerView view;
+    private ProgressBar bar;
     private List<KamarModel> kamarModels = new ArrayList<>();
     private DaftarKosAdapter kosAdapter;
     private KamarModel kamarModel;
@@ -58,15 +60,16 @@ public class Home extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
+        kamarModels.clear();
         view = (RecyclerView) v.findViewById(R.id.rv_daftar_kos);
         view.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         kosAdapter = new DaftarKosAdapter(getActivity(), kamarModels);
         view.setAdapter(kosAdapter);
+        bar = v.findViewById(R.id.progress_bar);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         queue = Volley.newRequestQueue(getActivity());
-        getData();
 
         return v;
     }
@@ -93,13 +96,15 @@ public class Home extends Fragment {
                                         kamar.getString("cover"),
                                         owner.getString("nama_kos"),
                                         kamar.getString("jenis") + " - " + kamar.getString("tipe"),
-                                        kamar.getString("harga"),
+                                        kamar.getString("harga") + " - sisa "
+                                            + kamar.getString("jumlah") + " kamar",
                                         kamar.toString());
                                 kamarModels.add(kamarModel);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        bar.setVisibility(View.GONE);
                         kosAdapter.notifyDataSetChanged();
                     }
                 },
@@ -122,6 +127,7 @@ public class Home extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        bar.setVisibility(View.VISIBLE);
         getData();
     }
 
