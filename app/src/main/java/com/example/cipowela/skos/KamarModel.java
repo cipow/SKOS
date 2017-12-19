@@ -4,18 +4,18 @@ package com.example.cipowela.skos;
  * Created by cipowela on 14/11/17.
  */
 
-public class TestModel {
-    private int gambar;
-    private String nama, tipe, harga;
+public class KamarModel {
+    private String gambar, nama, tipe, harga, object;
 
-    public TestModel(int gambar, String nama, String tipe, String harga) {
+    public KamarModel(String gambar, String nama, String tipe, String harga, String object) {
         this.gambar = gambar;
         this.nama = nama;
         this.tipe = tipe;
         this.harga = harga;
+        this.object = object;
     }
 
-    public int getGambar() {
+    public String getGambar() {
         return gambar;
     }
 
@@ -29,5 +29,9 @@ public class TestModel {
 
     public String getHarga() {
         return harga;
+    }
+
+    public String getObject() {
+        return object;
     }
 }

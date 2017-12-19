@@ -10,9 +10,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.cipowela.skos.subactivity.DetailKosActivity;
 import com.example.cipowela.skos.R;
-import com.example.cipowela.skos.TestModel;
+import com.example.cipowela.skos.KamarModel;
 
 import java.util.List;
 
@@ -22,11 +24,11 @@ import java.util.List;
 
 public class DaftarKosAdapter extends RecyclerView.Adapter<DaftarKosAdapter.DKAHolder> {
     private Context context;
-    private List<TestModel> testModels;
+    private List<KamarModel> kamarModels;
 
-    public DaftarKosAdapter(Context context, List<TestModel> testModels) {
+    public DaftarKosAdapter(Context context, List<KamarModel> kamarModels) {
         this.context = context;
-        this.testModels = testModels;
+        this.kamarModels = kamarModels;
     }
 
     @Override
@@ -38,23 +40,28 @@ public class DaftarKosAdapter extends RecyclerView.Adapter<DaftarKosAdapter.DKAH
 
     @Override
     public void onBindViewHolder(DKAHolder holder, int position) {
-        TestModel test = testModels.get(position);
-
-        holder.imageView.setImageResource(test.getGambar());
+        final KamarModel test = kamarModels.get(position);
+        Glide.with(context).load(test.getGambar())
+                .thumbnail(0.5f)
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.imageView);
         holder.nama.setText(test.getNama());
         holder.tipe.setText(test.getTipe());
         holder.harga.setText(test.getHarga());
         holder.lihat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, DetailKosActivity.class));
+                Intent intent = new Intent(context, DetailKosActivity.class);
+                intent.putExtra("data", test.getObject());
+                context.startActivity(intent);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return testModels.size();
+        return kamarModels.size();
     }
 
     public class DKAHolder extends RecyclerView.ViewHolder {

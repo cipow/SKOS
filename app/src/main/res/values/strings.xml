@@ -10,7 +10,7 @@
         <item>Rp 1.000.000</item>
     </string-array>
     <string-array name="valHarga">
-        <item>0</item>
+        <item>100000000</item>
         <item>300000</item>
         <item>600000</item>
         <item>800000</item>

@@ -14,11 +14,4 @@
         android:summary="cari kos yang masih memiliki sisa kamar"
         android:defaultValue="false"/>
 
-    <ListPreference
-        android:key="ordered"
-        android:title="Urutkan"
-        android:summary="urutkan berdasarkan"
-        android:defaultValue="0"
-        android:entries="@array/listOrdered"
-        android:entryValues="@array/valOrdered" />
 </PreferenceScreen>

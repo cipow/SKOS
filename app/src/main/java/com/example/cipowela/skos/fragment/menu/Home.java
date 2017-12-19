@@ -16,11 +16,23 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.cipowela.skos.ApiSKOS;
 import com.example.cipowela.skos.R;
-import com.example.cipowela.skos.TestModel;
+import com.example.cipowela.skos.KamarModel;
 import com.example.cipowela.skos.adapter.DaftarKosAdapter;
 import com.example.cipowela.skos.fragment.menu.userkos.FilterSettings;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +42,11 @@ import java.util.List;
  */
 public class Home extends Fragment {
     private RecyclerView view;
-    private List<TestModel> testModels = new ArrayList<>();
+    private List<KamarModel> kamarModels = new ArrayList<>();
     private DaftarKosAdapter kosAdapter;
+    private KamarModel kamarModel;
+    private RequestQueue queue;
+    private SharedPreferences sharedPreferences;
 
     public Home() {
         // Required empty public constructor
@@ -44,40 +59,70 @@ public class Home extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         view = (RecyclerView) v.findViewById(R.id.rv_daftar_kos);
-        kosAdapter = new DaftarKosAdapter(getActivity(), testModels);
         view.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        kosAdapter = new DaftarKosAdapter(getActivity(), kamarModels);
         view.setAdapter(kosAdapter);
-        isiData();
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        Log.d("M-harga", sharedPreferences.getString("harga","kosong"));
-        Log.d("sisa", String.valueOf(sharedPreferences.getBoolean("sisa",false)));
-        Log.d("ordered", sharedPreferences.getString("ordered","kosong"));
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        queue = Volley.newRequestQueue(getActivity());
+        getData();
 
         return v;
     }
 
-    private void isiData() {
-        TestModel test;
+    private void getData() {
+        String harga = sharedPreferences.getString("harga", "kosong");
+        int sisa = sharedPreferences.getBoolean("sisa_kamar", false) ? 1 : 0;
 
-        for (int i = 0; i < 4; i++) {
-            test = new TestModel(R.drawable.ruby, "Kos Permata", "putra - normal", "Rp 400.000/bln - sisa: 2 kamar");
-            testModels.add(test);
+        kamarModels.clear();
 
-            test = new TestModel(R.drawable.ruby, "Kos Permata", "putra - elite", "Rp 600.000/bln - sisa: 4 kamar");
-            testModels.add(test);
-
-            test = new TestModel(R.drawable.ruby, "Kos Perawan", "putri - normal", "Rp 500.000/bln - sisa: 5 kamar");
-            testModels.add(test);
-        }
-
-        kosAdapter.notifyDataSetChanged();
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET, ApiSKOS.getAllKamars(harga, sisa), null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            //Toast.makeText(getActivity(), response.getString("count"), Toast.LENGTH_SHORT).show();
+                            JSONArray data = response.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                JSONObject kamar = data.getJSONObject(i);
+                                Log.d("data", kamar.toString());
+                                JSONObject owner = kamar.getJSONObject("owner");
+                                kamarModel = new KamarModel(
+                                        kamar.getString("cover"),
+                                        owner.getString("nama_kos"),
+                                        kamar.getString("jenis") + " - " + kamar.getString("tipe"),
+                                        kamar.getString("harga"),
+                                        kamar.toString());
+                                kamarModels.add(kamarModel);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        kosAdapter.notifyDataSetChanged();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }
+        );
+        queue.add(request);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
     }
 
     @Override
