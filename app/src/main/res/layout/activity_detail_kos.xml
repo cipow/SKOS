@@ -139,7 +139,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="call" />
+                    android:text="call"
+                    android:onClick="call"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -250,10 +251,11 @@
                 android:layout_marginBottom="2dp"
                 android:background="@android:color/black" />
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/listGambar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="list gambar" />
+                android:orientation="vertical"/>
         </LinearLayout>
     </LinearLayout>
 

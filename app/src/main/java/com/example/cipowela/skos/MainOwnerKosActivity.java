@@ -14,13 +14,31 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.cipowela.skos.adapter.GuestViewAdapter;
 import com.example.cipowela.skos.adapter.OwnerKosViewAdapter;
 import com.example.cipowela.skos.fragment.menu.ownerkos.Login;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainOwnerKosActivity extends AppCompatActivity {
 
@@ -28,6 +46,9 @@ public class MainOwnerKosActivity extends AppCompatActivity {
     NavigationView navigation;
     ViewPager pager;
     Toolbar toolbar;
+
+    ImageView foto;
+    TextView nama;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +63,9 @@ public class MainOwnerKosActivity extends AppCompatActivity {
         drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
         navigation = (NavigationView) findViewById(R.id.navigationView);
         pager = (ViewPager) findViewById(R.id.viewPager);
+        View head = navigation.getHeaderView(0);
+        foto = head.findViewById(R.id.header_image_ownerkos);
+        nama = head.findViewById(R.id.header_nama_ownerkos);
 
         OwnerKosViewAdapter pagerAdapter = new OwnerKosViewAdapter(getSupportFragmentManager());
         pager.setAdapter(pagerAdapter);
@@ -104,6 +128,48 @@ public class MainOwnerKosActivity extends AppCompatActivity {
         });
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET, ApiSKOS.owners(), null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if (!response.getString("foto").equals("null")){
+                                Glide.with(getApplicationContext()).load(response.getString("foto"))
+                                        .thumbnail(0.5f)
+                                        .crossFade()
+                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .into(foto);
+                            }
+
+                            nama.setText(response.getString("nama"));
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }
+        ){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                SharedPreferences preferences = getSharedPreferences(Login.OwnnerKosPrefs,0);
+                headers.put("Authorization", preferences.getString("token", ""));
+
+                return headers;
+            }
+        };
+
+        queue.add(request);
     }
 
     private void setIconActionBar() {

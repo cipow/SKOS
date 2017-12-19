@@ -1,18 +1,26 @@
 package com.example.cipowela.skos.subactivity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.cipowela.skos.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,6 +32,7 @@ public class DetailKosActivity extends AppCompatActivity {
 
     private ImageView cover, foto_owner;
     private TextView nama_owner, alamat, telepon, lain, nama_kos, tipe, harga, sisa, fasilitas;
+    private LinearLayout ll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +71,8 @@ public class DetailKosActivity extends AppCompatActivity {
         harga = findViewById(R.id.harga_kamar);
         sisa = findViewById(R.id.sisa_kamar);
         fasilitas = findViewById(R.id.fasilitas_kamar);
+
+        ll = findViewById(R.id.listGambar);
     }
 
     private void setData() {
@@ -100,8 +111,33 @@ public class DetailKosActivity extends AppCompatActivity {
 
             fasilitas.setText(sb.toString());
 
+            ImageView image;
+            JSONArray jsonArray = kamar.getJSONArray("gambar");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject gambar = jsonArray.getJSONObject(i);
+                image = new ImageView(this);
+                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                image.setLayoutParams(
+                        new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                                500)
+                );
+                Glide.with(this).load(gambar.getString("gambar"))
+                        .thumbnail(0.5f)
+                        .crossFade()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(image);
+                ll.addView(image);
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @SuppressLint("MissingPermission")
+    public void call(View view) {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + telepon.getText().toString()));
+        startActivity(intent);
     }
 }
