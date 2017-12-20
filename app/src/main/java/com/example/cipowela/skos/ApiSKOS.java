@@ -19,4 +19,8 @@ public class ApiSKOS {
     public static String auth() {
         return owners() + "/auth";
     }
+
+    public static String kamarOwners() {
+        return owners() + "/kamars";
+    }
 }
