@@ -176,7 +176,13 @@ public class Profil extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.profil_edit) {
-            getActivity().startActivity(new Intent(getActivity(), ProfilEditActivity.class));
+            Intent intent = new Intent(getActivity(), ProfilEditActivity.class);
+            intent.putExtra("nama", nama.getText().toString());
+            intent.putExtra("telepon", telepon.getText().toString());
+            intent.putExtra("alamat", alamat.getText().toString());
+            intent.putExtra("nama_kos", nama_kos.getText().toString());
+            intent.putExtra("lain_lain", lain.getText().toString());
+            getActivity().startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

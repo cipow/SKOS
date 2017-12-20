@@ -20,6 +20,10 @@ public class ApiSKOS {
         return owners() + "/auth";
     }
 
+    public static String editOwner() {
+        return owners() + "/put";
+    }
+
     public static String kamarOwners() {
         return owners() + "/kamars";
     }

@@ -1,6 +1,10 @@
 package com.example.cipowela.skos.subactivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.support.design.widget.BaseTransientBottomBar;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -11,14 +15,34 @@ import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.cipowela.skos.ApiSKOS;
+import com.example.cipowela.skos.MainActivity;
 import com.example.cipowela.skos.R;
+import com.example.cipowela.skos.fragment.menu.ownerkos.Login;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProfilEditActivity extends AppCompatActivity {
 
     private TextInputLayout namaLayout, teleponLayout, namaKosLayout, alamatLayout, lainLayout;
     private TextInputEditText nama, telepon, namaKos, alamat, lain;
+    private RequestQueue queue;
+    private LinearLayout ll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +51,13 @@ public class ProfilEditActivity extends AppCompatActivity {
         settingToolbar();
         initObject();
         setTextChangeListener();
+
+        Intent intent = getIntent();
+        nama.setText(intent.getStringExtra("nama"));
+        telepon.setText(intent.getStringExtra("telepon"));
+        alamat.setText(intent.getStringExtra("alamat"));
+        namaKos.setText(intent.getStringExtra("nama_kos"));
+        lain.setText(intent.getStringExtra("lain_lain"));
     }
 
     @Override
@@ -44,8 +75,59 @@ public class ProfilEditActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.profil_edit_save) {
-            if (checkForm())
-                Toast.makeText(this, "save data", Toast.LENGTH_SHORT).show();
+            if (checkForm()) {
+                final Snackbar snackbar = Snackbar.make(ll, "Sending", BaseTransientBottomBar.LENGTH_INDEFINITE);
+                snackbar.show();
+
+                queue = Volley.newRequestQueue(this);
+                StringRequest request = new StringRequest(
+                        Request.Method.POST, ApiSKOS.editOwner(),
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject status = new JSONObject(response);
+                                    if (status.getString("status").equals("updated")) {
+                                        Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
+                                        snackbar.dismiss();
+                                        finish();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                            }
+                        }
+
+                ){
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("nama", nama.getText().toString());
+                        params.put("telepon", telepon.getText().toString());
+                        params.put("alamat", alamat.getText().toString());
+                        params.put("nama_kos", namaKos.getText().toString());
+                        params.put("lain_lain", lain.getText().toString());
+
+                        return params;
+                    }
+
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> headers = new HashMap<String, String>();
+                        SharedPreferences preferences = getSharedPreferences(Login.OwnnerKosPrefs, 0);
+                        headers.put("Authorization", preferences.getString("token", ""));
+
+                        return headers;
+                    }
+                };
+                queue.add(request);
+            }
             else
                 Toast.makeText(this, "silahkan lengkapi dengan benar", Toast.LENGTH_SHORT).show();
             return true;
@@ -89,6 +171,8 @@ public class ProfilEditActivity extends AppCompatActivity {
 
         lainLayout = (TextInputLayout) findViewById(R.id.IL_lain);
         lain = (TextInputEditText) findViewById(R.id.ET_lain);
+
+        ll = findViewById(R.id.ll);
     }
 
     private void setTextChangeListener() {
