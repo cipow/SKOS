@@ -3,8 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/filter_refresh"
+        android:title="refresh"
+        app:showAsAction="always"/>
+
+    <item
         android:id="@+id/filter_daftar"
         android:icon="@drawable/ic_filter"
         android:title="filter"
         app:showAsAction="always" />
+
 </menu>

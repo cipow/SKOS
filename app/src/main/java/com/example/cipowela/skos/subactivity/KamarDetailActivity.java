@@ -1,5 +1,6 @@
 package com.example.cipowela.skos.subactivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,12 +13,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.cipowela.skos.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class KamarDetailActivity extends AppCompatActivity {
 
     ImageView cover, cover_change;
     TextView tipe, jenis, harga, fasilitas, jumlah, penginap, sisa;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,8 @@ public class KamarDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_kamar_detail);
         settingToolbar();
         initObject();
+        setData();
+
         cover_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +81,7 @@ public class KamarDetailActivity extends AppCompatActivity {
     }
 
     private void initObject() {
+        intent = getIntent();
         cover = (ImageView) findViewById(R.id.cover_image);
         cover_change = (ImageView) findViewById(R.id.cover_change);
         tipe = (TextView) findViewById(R.id.kamar_detail_tipe);
@@ -79,7 +89,29 @@ public class KamarDetailActivity extends AppCompatActivity {
         harga = (TextView) findViewById(R.id.kamar_detail_harga);
         fasilitas = (TextView) findViewById(R.id.kamar_detail_fasilitas);
         jumlah = (TextView) findViewById(R.id.kamar_detail_jumlah);
-        penginap = (TextView) findViewById(R.id.kamar_detail_penginap);
-        sisa = (TextView) findViewById(R.id.kamar_detail_sisa);
+    }
+
+    private void setData() {
+        try {
+            JSONObject object = new JSONObject(intent.getStringExtra("data"));
+            Glide.with(this).load(object.getString("cover"))
+                    .thumbnail(0.5f)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(cover);
+            tipe.setText(object.getString("tipe"));
+            jenis.setText(object.getString("jenis"));
+            harga.setText(object.getString("harga"));
+            jumlah.setText(object.getString("jumlah"));
+
+            StringBuilder sb = new StringBuilder();
+            String[] daftarFasilitas = object.getString("fasilitas").split(",");
+            for (String s : daftarFasilitas) {
+                sb.append(s + "\n");
+            }
+            fasilitas.setText(sb.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

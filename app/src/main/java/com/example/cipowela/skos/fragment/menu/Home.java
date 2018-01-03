@@ -70,7 +70,7 @@ public class Home extends Fragment {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         queue = Volley.newRequestQueue(getActivity());
-
+        getData();
         return v;
     }
 
@@ -125,13 +125,6 @@ public class Home extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        bar.setVisibility(View.VISIBLE);
-        getData();
-    }
-
-    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.filter_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
@@ -141,6 +134,12 @@ public class Home extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.filter_daftar) {
             startActivity(new Intent(getActivity(), FilterSettings.class));
+            return true;
+        }
+
+        if (item.getItemId() == R.id.filter_refresh) {
+            bar.setVisibility(View.VISIBLE);
+            getData();
             return true;
         }
         return super.onOptionsItemSelected(item);

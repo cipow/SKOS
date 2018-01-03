@@ -115,6 +115,22 @@
                         android:text="HARGA KAMAR" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="Jumlah Kamar"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/kamar_detail_jumlah"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="JUMLAH KAMAR" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -137,87 +153,5 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@android:color/white"
-            android:orientation="vertical"
-            android:padding="5dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Kamar"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="5dp"
-                android:background="@android:color/black" />
-
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="1"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Jumlah"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/kamar_detail_jumlah"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="JUMLAH KAMAR" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Penginap"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/kamar_detail_penginap"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="JUMLAH PENGINAP" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Sisa"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/kamar_detail_sisa"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="SISA KAMAR" />
-                </LinearLayout>
-
-
-            </GridLayout>
-
-        </LinearLayout>
     </LinearLayout>
 </ScrollView>
