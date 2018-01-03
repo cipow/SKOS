@@ -3,9 +3,11 @@ package com.example.cipowela.skos.fragment.menu.ownerkos;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,6 +24,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -32,6 +35,7 @@ import com.example.cipowela.skos.subactivity.ProfilEditActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,6 +54,7 @@ public class Profil extends Fragment {
     View v;
     RequestQueue queue;
     SharedPreferences preferences;
+    int PICK_IMAGE_REQUEST;
 
 
     @Override
@@ -61,7 +66,53 @@ public class Profil extends Fragment {
         image_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "ganti foto profil", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_PICK);
+                startActivityForResult(Intent.createChooser(intent, "Pilih Foto"), PICK_IMAGE_REQUEST);
+
+                Toast.makeText(getActivity(), "Uploading", Toast.LENGTH_SHORT).show();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                Bitmap bitmap = null;
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] imageBytes = baos.toByteArray();
+                final String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
+                StringRequest request = new StringRequest(
+                        Request.Method.POST, ApiSKOS.ownerFoto(),
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                            }
+                        }
+                ) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+
+
+                        return params;
+                    }
+
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        Map<String, String> headers = new HashMap<String, String>();
+                        SharedPreferences preferences = getActivity().getSharedPreferences(Login.OwnnerKosPrefs, 0);
+                        headers.put("Authorization", preferences.getString("token", ""));
+
+                        return headers;
+                    }
+                };
+
+                RequestQueue queue = Volley.newRequestQueue(getActivity());
+                queue.add(request);
             }
         });
         queue = Volley.newRequestQueue(getActivity());
@@ -76,11 +127,14 @@ public class Profil extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            Glide.with(getActivity()).load(response.getString("foto"))
-                                    .thumbnail(0.5f)
-                                    .crossFade()
-                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                    .into(image);
+
+                            if (response.getString("foto") != "null") {
+                                Glide.with(getActivity()).load(response.getString("foto"))
+                                        .thumbnail(0.5f)
+                                        .crossFade()
+                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .into(image);
+                            }
 
                             nama.setText(response.getString("nama"));
                             telepon.setText(response.getString("telepon"));

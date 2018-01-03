@@ -24,7 +24,13 @@ public class ApiSKOS {
         return owners() + "/put";
     }
 
+    public static String ownerFoto() {
+        return owners() + "/foto";
+    }
+
     public static String kamarOwners() {
         return owners() + "/kamars";
     }
+
+
 }

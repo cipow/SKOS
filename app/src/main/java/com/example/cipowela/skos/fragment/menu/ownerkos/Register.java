@@ -2,6 +2,7 @@ package com.example.cipowela.skos.fragment.menu.ownerkos;
 
 
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -10,7 +11,9 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -90,8 +93,11 @@ public class Register extends Fragment {
 //                        MainActivity.pager.setCurrentItem(1);
 //                        Toast.makeText(getActivity(), "kirim data ke server", Toast.LENGTH_SHORT).show();
 
-
-                        final Snackbar snackbar = Snackbar.make(v, "Sending...", Snackbar.LENGTH_INDEFINITE);
+                        String text = "Sending....";
+                        SpannableString spannableString = new SpannableString(text);
+                        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFFFF"))
+                                , 0, text.length(), 0);
+                        final Snackbar snackbar = Snackbar.make(v, text, Snackbar.LENGTH_INDEFINITE);
                         snackbar.show();
 
                         RequestQueue queue = Volley.newRequestQueue(getActivity());

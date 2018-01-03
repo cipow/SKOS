@@ -81,17 +81,21 @@ public class DetailKosActivity extends AppCompatActivity {
             JSONObject kamar = new JSONObject(intent.getStringExtra("data"));
             JSONObject owner = kamar.getJSONObject("owner");
 
-            Glide.with(this).load(kamar.getString("cover"))
-                    .thumbnail(0.5f)
-                    .crossFade()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(cover);
+            if (kamar.getString("cover") != "null") {
+                Glide.with(this).load(kamar.getString("cover"))
+                        .thumbnail(0.5f)
+                        .crossFade()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(cover);
+            }
 
-            Glide.with(this).load(owner.getString("foto"))
-                    .thumbnail(0.5f)
-                    .crossFade()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(foto_owner);
+            if (owner.getString("foto") != "null") {
+                Glide.with(this).load(owner.getString("foto"))
+                        .thumbnail(0.5f)
+                        .crossFade()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(foto_owner);
+            }
 
             nama_owner.setText(owner.getString("nama"));
             alamat.setText(owner.getString("alamat"));

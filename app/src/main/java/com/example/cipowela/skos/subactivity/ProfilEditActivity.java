@@ -76,7 +76,11 @@ public class ProfilEditActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.profil_edit_save) {
             if (checkForm()) {
-                final Snackbar snackbar = Snackbar.make(ll, "Sending", BaseTransientBottomBar.LENGTH_INDEFINITE);
+                String text = "Sending";
+                SpannableString spannableString = new SpannableString(text);
+                spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFFFF"))
+                        , 0, text.length(), 0);
+                final Snackbar snackbar = Snackbar.make(ll, text, BaseTransientBottomBar.LENGTH_INDEFINITE);
                 snackbar.show();
 
                 queue = Volley.newRequestQueue(this);

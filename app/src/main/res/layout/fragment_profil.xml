@@ -23,7 +23,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ruby" />
+                    android:src="@drawable/no_image" />
 
                 <ImageView
                     android:id="@+id/profil_change_image"
